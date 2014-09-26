@@ -1,7 +1,7 @@
 commit_velocity
 ===============
 
-  .. image:: commit_velocity.png
+<img src="commit_velocity.png"/>
 
 ####About
 
