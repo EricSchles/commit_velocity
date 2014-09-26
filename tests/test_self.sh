@@ -7,7 +7,7 @@ for unit in "min" "hr" "day" "week" "month"; do
   my_velocity_value=$(echo $my_velocity | awk '{print $1}')
   my_velocity_unit=$(echo $my_velocity | awk '{print $2}')
 
-  if [[ " commits/$unit" = $my_velocity_unit ]]; then
+  if [[ ! "commits/$unit" = $my_velocity_unit ]]; then
     echo "Test Failure, bad units: $my_velocity"
     exit 1
   fi
