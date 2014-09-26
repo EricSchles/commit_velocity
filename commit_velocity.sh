@@ -15,7 +15,7 @@ function commit_velocity()
     logs=$(git log --format="%at" ${@:3})
 
   elif [ "$(hg summary 2> /dev/null)" ]; then
-    logs=$(hg log --template "{date} " ${@:3})
+    logs=$(hg log --template "{date(date, '%s')}\n" ${@:3})
   else
     echo "I can only calculate the velocity of git and hg repositories."
     return 1
@@ -26,9 +26,7 @@ function commit_velocity()
   count=0
   for log in $logs; do
     count=$((count+1))
-    # hg returns floats and bash arithmetic only handles ints
-    # hg also returns timestamps with tz offsets which may be fixed via bc
-    last_log=$(printf %.0f "$(echo $log | sed -e "s/\.0-/-/g;s/\.0/+/g" | bc)")
+    last_log=$log
     if [[ "$count" -eq 1 && "$2" = "relative" ]]; then today=$last_log; fi
   done
 
