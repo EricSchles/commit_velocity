@@ -25,13 +25,11 @@ function commit_velocity()
 
   count=0
   for log in $logs; do
-    if [[ "$count" -eq 0 && "$2" = "relative" ]]; then
-      # hg returns floats and bash arithmetic only handles ints
-      # hg also returns timestamps with tz offsets which may be fixed via bc
-      today=$(printf %.0f "$(echo $log | bc)")
-    fi
-    last_log=$(printf %.0f "$(echo $log | bc)")
     count=$((count+1))
+    # hg returns floats and bash arithmetic only handles ints
+    # hg also returns timestamps with tz offsets which may be fixed via bc
+    last_log=$(printf %.0f "$(echo $log | sed -e "s/\.0-/-/g;s/\.0/+/g" | bc)")
+    if [[ "$count" -eq 1 && "$2" = "relative" ]]; then today=$last_log; fi
   done
 
   if [ "$count" -gt 0 ]; then
