@@ -15,10 +15,12 @@ for unit in "min" "hr" "day" "week" "month"; do
   if [[ $unit = "min" ]]; then
     if [[ $my_velocity_value -ne 0 ]]; then 
       echo Test Failure, bad value: $my_velocity
+      exit 1
     fi
   else
     if [[ $my_velocity_value -lt 1 ]]; then
       echo Test Failure, bad value: $my_velocity
+      exit 1
     fi
   fi
 
