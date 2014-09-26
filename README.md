@@ -7,7 +7,10 @@ commit_velocity
 
 A handy bash function that calculates the velocity of any mercurial or git 
 repository. Velocity may be relative or absolute, meaning, calculated
-against the current timestamp or against the most recent commit.
+against the current time or against the most recent commit.
+
+It was created with the intention of helping to explore an organization's 
+repositories, to take note of which were most active.
 
 ####Install
 
